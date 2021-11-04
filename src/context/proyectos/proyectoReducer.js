@@ -1,4 +1,4 @@
-import { FORMULARIO_PROYECTO, OBTENER_PROYECTOS } from '../../types';
+import { FORMULARIO_PROYECTO, OBTENER_PROYECTOS, AGREGAR_PROYECTO } from '../../types';
 
 /* eslint import/no-anonymous-default-export: [2, {"allowArrowFunction": true}] */
 export default (state, action) => {
@@ -12,6 +12,12 @@ export default (state, action) => {
             return{
                 ...state,
                 proyectos: action.payload
+            }
+        case AGREGAR_PROYECTO:
+            return{
+                ...state,
+                proyectos: [...state.proyectos, action.payload],
+                formulario: false
             }
         default:
             return state;
