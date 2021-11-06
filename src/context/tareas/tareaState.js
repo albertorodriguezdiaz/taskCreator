@@ -5,7 +5,9 @@ import {
         TAREAS_PROYECTO,
         AGREGAR_TAREA,
         VALIDAR_TAREA,
-        ELIMINAR_TAREA
+        ELIMINAR_TAREA,
+        ESTADO_TAREA,
+        TAREA_ACTUAL
 } from '../../types';
 
 
@@ -25,7 +27,8 @@ const TareaState = props => {
             { id: 11, nombre: 'Elegir Plataforma de pago', estado: false, proyectoId: 3 },
         ],
         tareasproyecto: null, 
-        errortarea: false
+        errortarea: false,
+        tareaseleccionada: null
     }
 
     // Crear dispatch y state
@@ -64,6 +67,22 @@ const TareaState = props => {
         })
     }
 
+    // Cambiar el estdo de la tarea
+    const cambiarEstadoTarea = tarea => {
+        dispatch({
+            type: ESTADO_TAREA,
+            payload: tarea
+        })
+    }
+
+    // Extrae una tarea para edicion
+    const guardarTareaActual = tarea => {
+        dispatch({
+            type: TAREA_ACTUAL,
+            payload: tarea
+        })
+    }
+
 
     return(
         <tareaContext.Provider
@@ -71,10 +90,13 @@ const TareaState = props => {
                 tareas: state.tareas,
                 tareasproyecto: state.tareasproyecto,
                 errortarea: state.errortarea,
+                tareaseleccionada: state.tareaseleccionada,
                 obtenerTareas,
                 agregarTarea,
                 validarTarea,
-                eliminarTarea
+                eliminarTarea,
+                cambiarEstadoTarea,
+                guardarTareaActual
             }}
         >
             {props.children}
