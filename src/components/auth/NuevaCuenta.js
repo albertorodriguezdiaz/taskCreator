@@ -12,7 +12,7 @@ const NuevaCuenta = (props) => {
     const authContext = useContext(AuthContext);
     const { mensaje, autenticado, registrarUsuario } = authContext;
 
-    // en casi de que el usuario se haya autenticado o registrado o sea un registr duplicado
+    // en caso de que el usuario se haya autenticado o registrado o sea un registr duplicado
     useEffect( () =>{
         if (autenticado) {
             props.history.push('/proyectos');
@@ -76,8 +76,7 @@ const NuevaCuenta = (props) => {
 
     return ( 
         <div className="form-usuario">
-            {
-                alerta 
+            { alerta 
                     ? (
                         <div className={`alerta ${alerta.categoria}`}>{alerta.msg}</div>
                       )

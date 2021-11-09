@@ -26,11 +26,15 @@ export default (state, action) => {
             }
         case OBTENER_USUARIO:
             return{
-
+                ...state,
+                usuario: action.payload
             }
         case LOGIN_EXITOSO:
+            localStorage.setItem('token', action.payload.token);
             return{
-
+                ...state,
+                autenticado: true,
+                mensaje: null
             }
         case LOGIN_ERROR:
             localStorage.removeItem('token');

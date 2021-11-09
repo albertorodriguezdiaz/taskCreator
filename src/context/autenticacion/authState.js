@@ -3,6 +3,7 @@ import AuthContext from './authContext';
 import AuthReducer from './authReducer';
 
 import clienteAxios from '../../config/axios';
+import tokenAuth from '../../config/token';
 
 import { 
     REGISTRO_EXITOSO,
@@ -10,7 +11,8 @@ import {
     OBTENER_USUARIO,
     LOGIN_EXITOSO,
     LOGIN_ERROR,
-    CERRAR_SESION
+    CERRAR_SESION,
+    OBTENER_PROYECTOS
  } from '../../types';
 
 const AuthState = props => {
@@ -57,18 +59,53 @@ const AuthState = props => {
     const usuarioAutenticado = async () =>{
         const token = localStorage.getItem('token');
         if (token) {
-            // TODO: funcion para enviar el token por header
-
+            // funcion para enviar el token por header
+            tokenAuth(token);
         }
 
         try {
             const respuesta = await clienteAxios.get('/api/auth');
-            console.log(respuesta);
+
+            // console.log(respuesta);
+            dispatch({
+                type: OBTENER_USUARIO,
+                payload: respuesta.data.usuario
+            });
 
         } catch (error) {
             dispatch({
                 type: LOGIN_ERROR
-            })
+            });
+        }
+    }
+
+
+    //   Cuando el usuario inicia sesion
+    const iniciarSesion = async datos => {
+        try {
+            const respuesta = await clienteAxios.post('/api/auth', datos);
+            console.log(respuesta);
+
+            dispatch({
+                type: LOGIN_EXITOSO,
+                payload: respuesta.data
+            });
+
+            // Obtener usuario
+            usuarioAutenticado();
+
+        } catch (error) {
+
+            console.log(error.response.data.msg);
+            const alerta = {
+                msg: error.response.data.msg,
+                categoria: 'alerta-error'
+            }
+
+            dispatch({
+                type: LOGIN_ERROR,
+                payload: alerta
+            });
         }
     }
     
@@ -81,7 +118,9 @@ const AuthState = props => {
                 autenticado: state.autenticado,
                 usuario: state.usuario,
                 mensaje: state.mensaje,
-                registrarUsuario
+                registrarUsuario,
+                usuarioAutenticado,
+                iniciarSesion
             }}
         >
             {props.children}
