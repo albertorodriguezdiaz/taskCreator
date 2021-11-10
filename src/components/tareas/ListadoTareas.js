@@ -25,7 +25,7 @@ const ListadoTareas = () => {
 
     // Eliminar un proyecto
     const onClickEliminar = () => {
-        eliminarProyecto(proyectoActual.id);
+        eliminarProyecto(proyectoActual._id);
     }
     
     return ( 
@@ -39,7 +39,7 @@ const ListadoTareas = () => {
                         {
                             tareasproyecto.map( tarea => (
                                 <CSSTransition
-                                    key={tarea.id}
+                                    key={tarea._id}
                                     timeout={500}
                                     classNames="tarea"
                                 >

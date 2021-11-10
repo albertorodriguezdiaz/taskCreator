@@ -24,7 +24,9 @@ const ListadoProyectos = () => {
             <TransitionGroup>
             {proyectos.map(proyecto =>(
                 <CSSTransition
-                    key={proyecto.id}
+                    // key={proyecto.id}
+                    key={proyecto._id} // id desde mongo
+                    classNames="proyecto"
                 >
                     <Proyecto                        
                         proyecto={proyecto}
