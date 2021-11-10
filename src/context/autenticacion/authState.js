@@ -11,8 +11,7 @@ import {
     OBTENER_USUARIO,
     LOGIN_EXITOSO,
     LOGIN_ERROR,
-    CERRAR_SESION,
-    OBTENER_PROYECTOS
+    CERRAR_SESION
  } from '../../types';
 
 const AuthState = props => {
@@ -108,6 +107,14 @@ const AuthState = props => {
             });
         }
     }
+
+
+    // Cerrar la sesion del usuario
+    const cerrarSesion = () => {
+        dispatch({
+            type: CERRAR_SESION
+        });
+    }
     
 
 
@@ -120,7 +127,8 @@ const AuthState = props => {
                 mensaje: state.mensaje,
                 registrarUsuario,
                 usuarioAutenticado,
-                iniciarSesion
+                iniciarSesion,
+                cerrarSesion
             }}
         >
             {props.children}

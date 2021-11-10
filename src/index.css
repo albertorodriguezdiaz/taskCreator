@@ -365,3 +365,8 @@ aside  {
   text-transform: uppercase;
 }
 
+.color-white{
+  color: #fff;
+  font-weight: 400;
+  letter-spacing: 2px;
+}
