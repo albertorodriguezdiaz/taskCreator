@@ -1,7 +1,7 @@
 import React, {useContext, useState, useEffect} from 'react';
 import proyectoContext from '../../context/proyectos/proyectoContext';
 import tareaContext from '../../context/tareas/tareaContext';
-import { v4 as uuidv4 } from 'uuid';
+// import { v4 as uuidv4 } from 'uuid';
 
 const FormTarea = () => {
 
@@ -61,9 +61,9 @@ const FormTarea = () => {
         // Validar si es edicion o es tarea nueva
         if (tareaseleccionada === null) {
             // Agregar la nueva tarea al state de tareas
-            tarea.proyectoId = proyectoActual.id;
-            tarea.estado = false;
-            tarea.id = uuidv4();
+            tarea.proyecto = proyectoActual._id;
+            // tarea.estado = false;
+            // tarea.id = uuidv4();
             agregarTarea(tarea);
         } else {
             // actualizar tarea existente
@@ -71,7 +71,7 @@ const FormTarea = () => {
         }
         
         // Obtener y filtrar las tareas del proyecto
-        obtenerTareas(proyectoActual.id);
+        obtenerTareas(proyectoActual._id);
 
         // Reiniciar el form
         guardarTarea({

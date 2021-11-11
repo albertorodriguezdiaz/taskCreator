@@ -8,7 +8,9 @@ const Barra = () => {
     const { usuario, usuarioAutenticado, cerrarSesion } = authContext;
 
     useEffect(() => {
+           
         usuarioAutenticado();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
 

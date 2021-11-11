@@ -20,6 +20,7 @@ const NuevaCuenta = (props) => {
         if (mensaje) {
             mostrarAlerta(mensaje.msg, mensaje.categoria)
         }
+   // eslint-disable-next-line react-hooks/exhaustive-deps
     },[mensaje, autenticado, props.history])
 
     // State para iniciar Sesion
